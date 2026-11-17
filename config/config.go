@@ -8,14 +8,14 @@ import (
 )
 
 var (
-	cconfigInstance *structs.Config
-	configOnce      sync.Once
-	Validator       = validator.New()
+	configInstance *structs.Config
+	configOnce     sync.Once
+	Validator      = validator.New()
 )
 
 func GetConfig() *structs.Config {
 	configOnce.Do(func() {
-		cconfigInstance = &structs.Config{
+		configInstance = &structs.Config{
 			Server: &structs.ServerConfig{
 				LogLevel: getEnvAsString("LOG_LEVEL", "INFO"),
 			},
@@ -27,5 +27,5 @@ func GetConfig() *structs.Config {
 		}
 	})
 
-	return cconfigInstance
+	return configInstance
 }
